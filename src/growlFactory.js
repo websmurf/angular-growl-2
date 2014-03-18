@@ -128,14 +128,14 @@ angular.module("angular-growl").provider("growl", function() {
 		function sendHtml5Notify(icon, title, content, ondisplay, onclose) {
 			if($window.webkitNotifications.checkPermission() === 0) {
 				icon = icon || 'favicon.ico';
-				var notifi = $window.webkitNotifications.createNotification(icon, title, content);
+				var notify = $window.webkitNotifications.createNotification(icon, title, content);
 				if(typeof ondisplay === 'function') {
-					notifi.ondisplay = ondisplay;
+					notify.ondisplay = ondisplay;
 				}
 				if(typeof oncloase === 'function') {
 					notify.onclase = onclose;
 				}
-				notifi.show();
+				notify.show();
 			} else {
 				window.webkitNotifications.requestPermission();
 			}
