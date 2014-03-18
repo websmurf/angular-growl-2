@@ -36,6 +36,10 @@ app.controller("demoCtrl",  function demoCtrl($scope, growl, $http) {
 			config.enableHtml = $scope.enableHtml;
 		}
 
+		if ($scope.enableHtml5Mode) {
+			config.enableHtml5Mode = $scope.enableHtml5Mode;
+		}
+
 		if ($scope.alertType === "success") {
 			growl.success($scope.message, config);
 		}
@@ -52,8 +56,6 @@ app.controller("demoCtrl",  function demoCtrl($scope, growl, $http) {
 			growl.error($scope.message, config);
 		}
 	};
-
-	growl.html5Notify(null, "Getin", "Testing out HTML5 notifications");
 
 	$scope.simulateServerMessages= function() {
 		$http.get("/mockbackend").then(function(data) {

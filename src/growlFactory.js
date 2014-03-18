@@ -3,6 +3,7 @@ angular.module("angular-growl").provider("growl", function() {
 
 	var _ttl = null,
       _enableHtml = false,
+      _enableHtml5Mode = false,
 			_messagesKey = 'messages',
 			_messageTextKey = 'text',
 			_messageSeverityKey = 'severity',
@@ -25,6 +26,15 @@ angular.module("angular-growl").provider("growl", function() {
 	 */
 	this.globalEnableHtml = function(enableHtml) {
 		_enableHtml = enableHtml;
+	};
+
+	/**
+	 * set whether HTML 5 notifications are used with a fall back to the default or not
+	 *
+	 * @param {bool} enableHtml5Mode true to use HTML5 notifications if possilbe
+	 */
+	this.globalEnableHtml5Mode = function(enableHtml5Mode) {
+		_enableHtml5Mode = enableHtml5Mode;
 	};
 
 	/**
@@ -119,22 +129,28 @@ angular.module("angular-growl").provider("growl", function() {
 				severity: severity,
 				ttl: _config.ttl || _ttl,
 				enableHtml: _config.enableHtml || _enableHtml,
-				disableCloseButton: _config.disableCloseButton || _disableCloseButton
+				disableCloseButton: _config.disableCloseButton || _disableCloseButton,
+				enableHtml5Mode: _config.enableHtml5Mode || _enableHtml5Mode
 			};
 
-			broadcastMessage(message);
+			if (message.enableHtml5Mode) {
+				sendHtml5Notify(message);
+			} else {
+				broadcastMessage(message);
+			}
 		}
 
-		function sendHtml5Notify(icon, title, content, ondisplay, onclose) {
+		function sendHtml5Notify(message) {
 			if($window.webkitNotifications.checkPermission() === 0) {
-				icon = icon || 'favicon.ico';
-				var notify = $window.webkitNotifications.createNotification(icon, title, content);
-				if(typeof ondisplay === 'function') {
-					notify.ondisplay = ondisplay;
-				}
-				if(typeof oncloase === 'function') {
-					notify.onclase = onclose;
-				}
+				var icon = "../src/images/" + message.severity + ".png";
+				console.log(icon);
+				var notify = $window.webkitNotifications.createNotification(icon, "Notification", message.text);
+				// if(typeof ondisplay === 'function') {
+				// 	notify.ondisplay = ondisplay;
+				// }
+				// if(typeof oncloase === 'function') {
+				// 	notify.onclase = onclose;
+				// }
 				notify.show();
 			} else {
 				window.webkitNotifications.requestPermission();
@@ -232,8 +248,7 @@ angular.module("angular-growl").provider("growl", function() {
 			info: info,
 			success: success,
 			addServerMessages: addServerMessages,
-			onlyUnique: onlyUnique,
-			html5Notify: html5Notify
+			onlyUnique: onlyUnique
 		};
 	}];
 });
