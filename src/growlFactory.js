@@ -95,7 +95,7 @@ angular.module("angular-growl").provider("growl", function() {
 		};
 	}];
 
-	this.$get = ["$rootScope", "$filter", function ($rootScope, $filter) {
+	this.$get = ["$rootScope", "$filter", "$window", function ($rootScope, $filter, $window) {
 		var translate;
 
 		try {
@@ -123,6 +123,22 @@ angular.module("angular-growl").provider("growl", function() {
 			};
 
 			broadcastMessage(message);
+		}
+
+		function sendHtml5Notify(icon, title, content, ondisplay, onclose) {
+			if($window.webkitNotifications.checkPermission() === 0) {
+				icon = icon || 'favicon.ico';
+				var notifi = $window.webkitNotifications.createNotification(icon, title, content);
+				if(typeof ondisplay === 'function') {
+					notifi.ondisplay = ondisplay;
+				}
+				if(typeof oncloase === 'function') {
+					notify.onclase = onclose;
+				}
+				notifi.show();
+			} else {
+				window.webkitNotifications.requestPermission();
+			}
 		}
 
 		/**
@@ -163,6 +179,11 @@ angular.module("angular-growl").provider("growl", function() {
 		 */
 		function success(text, config) {
 			sendMessage(text, config, "success");
+		}
+
+
+		function html5Notify(title, context, ondisplay, onclose) {
+			sendHtml5Notify(title, context, ondisplay, onclose);
 		}
 
 		/**
@@ -211,7 +232,8 @@ angular.module("angular-growl").provider("growl", function() {
 			info: info,
 			success: success,
 			addServerMessages: addServerMessages,
-			onlyUnique: onlyUnique
+			onlyUnique: onlyUnique,
+			html5Notify: html5Notify
 		};
 	}];
 });

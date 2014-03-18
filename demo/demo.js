@@ -53,6 +53,8 @@ app.controller("demoCtrl",  function demoCtrl($scope, growl, $http) {
 		}
 	};
 
+	growl.html5Notify(null, "Getin", "Testing out HTML5 notifications");
+
 	$scope.simulateServerMessages= function() {
 		$http.get("/mockbackend").then(function(data) {
 			console.log(data);
