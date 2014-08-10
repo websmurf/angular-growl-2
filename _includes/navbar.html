@@ -19,7 +19,7 @@
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 {% for post in site.posts %}
-                <li><a href="{{site.baseurl}}#{{post.hashkey}}">{{post.title}}</a></li>
+                <li><a href="#{{post.hashkey}}">{{post.title}}</a></li>
                 {% endfor %}
               </ul>
             </li>

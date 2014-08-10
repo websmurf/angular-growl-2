@@ -44,6 +44,9 @@ app.controller("demoCtrl", ['$scope', 'growl', function($scope, growl) {
   }
 }]);
 {% endhighlight %}
+
+<strong>Important:</strong> Clicking on a growl message will disable the TTL. This is handy for longer messages
+and allows the user to completely read it. Dismissing the message is still possible by clicking on it again.
   </div>
   <div class="col-md-6">
     <p data-height="400" data-theme-id="0" data-slug-hash="tpaeH" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/JanStevens/pen/tpaeH/'>Angular Growl Reverse Messages</a> by Jan Stevens (<a href='http://codepen.io/JanStevens'>@JanStevens</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
