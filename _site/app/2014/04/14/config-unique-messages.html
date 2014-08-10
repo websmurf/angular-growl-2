@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-6 show-grid">
+    <div growl reference="2"></div>
+    <div ng-controller="uniqueMessagesCtrl">
+      <button ng-click="basicUsage('warning')" type="button" class="btn btn-warning">Warning</button>
+      <button ng-click="basicUsage('info')" type="button" class="btn btn-info">Info</button>
+      <button ng-click="basicUsage('danger')" type="button" class="btn btn-danger">Danger</button>
+      <button ng-click="basicUsage('success')" type="button" class="btn btn-success">Success</button>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <p>To get started, inject the <strong>growl</strong> factory in your controller and
+      call one of the 4 basic functions that the factory provides. The following 4 types of
+      messages are available: </p>
+
+      <ul>
+        <li>Warning</li>
+        <li>Info</li>
+        <li>Danger</li>
+        <li>Success</li>
+      </ul>
+
+    <p>Place an empty <code>div</code> in your HTML markup with the growl directive. The growl notifications
+      will be rendered inside the empty <code>div</code>.
+      For growl like notification the location of the <code>div</code> in the DOM does not matter.</p>
+</div>
+</div>
+<div class="row code">
+  <tabset>
+    <tab heading="Markup">
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">growl</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;basicDemoCtrl&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;basicUsage(&#39;warning&#39;)&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-warning&quot;</span><span class="nt">&gt;</span>Warning<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;basicUsage(&#39;info&#39;)&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-info&quot;</span><span class="nt">&gt;</span>Info<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;basicUsage(&#39;danger&#39;)&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="nt">&gt;</span>Danger<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;basicUsage(&#39;success&#39;)&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-success&quot;</span><span class="nt">&gt;</span>Success<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+    </tab>
+    <tab heading="JavaScript">
+<div class="highlight"><pre><code class="javascript"><span class="nx">demoApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;demoApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;angular-growl&#39;</span><span class="p">])</span>
+
+<span class="nx">demoApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;basicDemoCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;growl&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">growl</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$scope</span><span class="p">.</span><span class="nx">basicUsage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="s2">&quot;success&quot;</span><span class="o">:</span>
+        <span class="nx">growl</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s2">&quot;I&#39;m a success message&quot;</span><span class="p">);</span>
+      <span class="k">case</span> <span class="s2">&quot;info&quot;</span><span class="o">:</span>
+        <span class="nx">growl</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">&quot;I&#39;m an info message&quot;</span><span class="p">);</span>
+      <span class="k">case</span> <span class="s2">&quot;warning&quot;</span><span class="o">:</span>
+        <span class="nx">growl</span><span class="p">.</span><span class="nx">warning</span><span class="p">(</span><span class="s2">&quot;I&#39;m the warning message&quot;</span><span class="p">);</span>
+      <span class="k">default</span><span class="o">:</span>
+        <span class="nx">growl</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Ups, error message here!&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}]);</span>
+</code></pre></div>
+    </tab>
+  </tabset>
+</div>
+
+
