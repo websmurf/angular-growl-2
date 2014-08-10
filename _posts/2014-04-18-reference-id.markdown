@@ -2,7 +2,7 @@
 layout: default
 title:  Reference ID
 subtitle: "default: 0"
-hashkey: config-reverse-messages
+hashkey: config-reference-id
 categories:
 - docs
 - configuration

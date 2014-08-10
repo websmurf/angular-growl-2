@@ -2,7 +2,7 @@
 layout: default
 title:  Inline Messages
 subtitle: "default: false"
-hashkey: config-reverse-messages
+hashkey: config-inline-messages
 categories:
 - docs
 - configuration
