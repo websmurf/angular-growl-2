@@ -40,7 +40,7 @@ app.config(["growlProvider", "$httpProvider", function(growlProvider, $httpProvi
     growlProvider.messageTextKey("message-text");
     growlProvider.messageTitleKey("message-title");
     growlProvider.messageSeverityKey("severity-level");
-    $httpProvider.responseInterceptors.push(growlProvider.serverMessagesInterceptor);
+    $httpProvider.interceptors.push(growlProvider.serverMessagesInterceptor);
 }]);
 {% endhighlight %}
 
