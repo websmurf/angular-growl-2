@@ -170,8 +170,8 @@ angular.module('angular-growl').provider('growl', function () {
     'growl',
     function ($q, growl) {
       function checkResponse(response) {
-        if (response !== undefined && response.data && response.data[_messagesKey] && response.data[_messagesKey].length > 0) {
-          growl.addServerMessages(response.data[_messagesKey]);
+        if (response !== undefined && response.data  && response.data.meta && response.data.meta[_messagesKey] && response.data.meta[_messagesKey].length > 0 ) {
+          growl.addServerMessages(response.data.meta[_messagesKey]);
         }
       }
       return {
