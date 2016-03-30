@@ -10,7 +10,7 @@
 	"homepage": "http://janstevens.github.io/angular-growl-2",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Swilvan/angular-growl-2"
+		"url": "https://github.com/patrickdronk/angular-growl-2"
 	},
 	"license": "MIT",
 	"main": ["./build/angular-growl.js", "./build/angular-growl.css"],
